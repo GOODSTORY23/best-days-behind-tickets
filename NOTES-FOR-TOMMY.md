@@ -16,5 +16,7 @@ Things I noticed but did not change:
 - **Leftovers on SiteGround (2026-11-11).** Inside bestdaysbehind.info → public_html → tickets there's an empty
   `bdb-tickets` folder and the `bdb-tickets.zip` upload file. Neither one affects the page. I left them alone
   (no deleting without your OK). There's also a copy of `bdb-tickets.zip` on your Desktop.
+- **bestdaysbehind.info home page still lists Shawn Courters on drums** (in "Who We Are" and "The Band"),
+  not Ryan Via. Noticed 2026-11-11; not changed.
 - **Two copies of the page now.** bestdaysbehind.info/tickets (SiteGround) and the GitHub address. A change pushed
   to GitHub does NOT update the SiteGround copy, so it has to be re-uploaded there too.
