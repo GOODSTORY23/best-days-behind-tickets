@@ -13,3 +13,8 @@ Things I noticed but did not change:
   If Opendate lets you add a Meta pixel to the event, adding this same pixel ID there would count real purchases.
 - The logo on bestdaysbehind.info is a tiny file (50 pixels wide), so I cut a sharper logo badge out of
   the lineup picture you sent instead.
+- **Leftovers on SiteGround (2026-11-11).** Inside bestdaysbehind.info → public_html → tickets there's an empty
+  `bdb-tickets` folder and the `bdb-tickets.zip` upload file. Neither one affects the page. I left them alone
+  (no deleting without your OK). There's also a copy of `bdb-tickets.zip` on your Desktop.
+- **Two copies of the page now.** bestdaysbehind.info/tickets (SiteGround) and the GitHub address. A change pushed
+  to GitHub does NOT update the SiteGround copy, so it has to be re-uploaded there too.
