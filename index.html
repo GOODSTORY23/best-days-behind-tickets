@@ -209,9 +209,11 @@ section{position:relative}
 .venue-btns{display:flex;flex-wrap:wrap;gap:22px}
 
 /* ---------- 8. Final CTA ---------- */
-.final{position:relative;overflow:hidden;text-align:center;padding:96px 0 110px;color:#fff;background:#000}
-.final .bg{position:absolute;inset:0;background:url(images/band.webp) center 35%/cover;filter:contrast(1.25) saturate(1.2) brightness(.5);transform:scale(1.05)}
-.final .bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(17,17,17,.2),rgba(17,17,17,.85)),radial-gradient(ellipse 60% 50% at 50% 0%,rgba(255,46,136,.3),transparent 70%),var(--halftone);opacity:.85}
+.final{position:relative;overflow:hidden;text-align:center;padding:calc(76vw - 40px) 0 96px;color:#fff;background:#000}
+.final .bg{position:absolute;left:0;right:0;top:0;height:calc(76vw + 30px);background:#000 url(images/band.webp) center top/100% auto no-repeat;filter:contrast(1.15) saturate(1.25) brightness(1.05)}
+.final .bg::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 45% 60% at 0% 20%,rgba(255,46,136,.45),transparent 70%),radial-gradient(ellipse 45% 60% at 100% 15%,rgba(30,79,216,.5),transparent 70%);mix-blend-mode:screen}
+.final .bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 0%,transparent 50%,rgba(0,0,0,.75) 78%,#000 100%)}
+.final p{text-shadow:0 2px 8px #000}
 .final .inner{position:relative}
 .final h2{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:clamp(3.6rem,16vw,8.5rem);line-height:.85;margin-bottom:12px}
 .final h2 span{color:var(--pink);display:block;text-shadow:6px 6px 0 var(--blue)}
@@ -252,6 +254,9 @@ footer nav{display:flex;flex-wrap:wrap;justify-content:center;gap:18px;margin-bo
   .sec{padding:100px 0}
   .sticky{display:none}
   footer{padding-bottom:32px}
+  .final{padding:120px 0 130px}
+  .final .bg{bottom:0;height:auto;background-size:cover;background-position:center 30%;filter:contrast(1.15) saturate(1.25) brightness(.95)}
+  .final .bg::after{background:radial-gradient(ellipse 42% 55% at 50% 52%,rgba(0,0,0,.72),transparent 100%),linear-gradient(180deg,rgba(0,0,0,.1) 0%,rgba(0,0,0,.25) 60%,rgba(0,0,0,.85) 100%)}
 }
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important}
