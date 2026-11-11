@@ -10,8 +10,7 @@ UNWARPED show (Sat Nov 14, 2026, West End Trading Co, Sanford, FL).
 ## How the page handles future shows
 - All show details live in one list called `UPCOMING`, near the bottom of `index.html`.
 - The page always shows the soonest show that hasn't finished yet.
-- 6 hours after doors open, a show drops off by itself and moves to the top of
-  "Where We've Played".
+- 6 hours after doors open, a show drops off by itself. Old shows are never shown.
 - With no upcoming shows, the page switches to "Next show coming soon" and its
   buttons point to the band's Facebook page.
 

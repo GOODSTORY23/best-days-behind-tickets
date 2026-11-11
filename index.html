@@ -225,14 +225,6 @@ footer nav{display:flex;flex-wrap:wrap;justify-content:center;gap:18px;margin-bo
 .sticky .info b{color:var(--yellow);font-weight:400;display:block;font-size:1.25rem}
 .sticky .btn{font-size:1.3rem;padding:.55em 1em;box-shadow:5px 5px 0 var(--pink);border-color:#fff;background:var(--yellow);color:var(--black);transform:none}
 
-/* ---------- Where we've played ---------- */
-.played{list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-bottom:34px}
-.played li{display:flex;gap:14px;align-items:center;background:var(--paper);border:3px solid var(--black);box-shadow:5px 5px 0 var(--black);padding:10px 14px}
-.played li:nth-child(3n+1){transform:rotate(-.8deg)} .played li:nth-child(3n+2){transform:rotate(.6deg)}
-.played .when{flex:none;width:64px;text-align:center;font-family:var(--display);font-size:1.45rem;line-height:1;background:var(--black);color:var(--yellow);padding:8px 4px 6px}
-.played .when small{display:block;font-family:var(--stamp);font-size:.8rem;letter-spacing:.08em;color:#fff;margin-top:3px}
-.played .what{font-size:.95rem;line-height:1.25}
-.played .what b{display:block;font-family:var(--stamp);font-weight:400;font-size:1.3rem;letter-spacing:.03em;line-height:1.05}
 .no-show .show-only{display:none!important}
 
 /* ---------- Reveal on scroll ---------- */
@@ -396,17 +388,6 @@ footer nav{display:flex;flex-wrap:wrap;justify-content:center;gap:18px;margin-bo
 
 <div class="wire light" role="presentation"></div>
 
-<!-- Where we've played -->
-<section class="sec grunge" id="played">
-  <div class="wrap">
-    <h2 class="sec-title reveal">Where We’ve Played</h2>
-    <ul class="played reveal" data-s="played"></ul>
-    <a class="btn blue follow" href="https://www.facebook.com/Bestdaysbehindfl" target="_blank" rel="noopener">Follow for Next Shows <span class="arrow">→</span></a>
-  </div>
-</section>
-
-<div class="wire" role="presentation"></div>
-
 <!-- 6. Why you can't miss it -->
 <section class="sec grunge show-only" id="why">
   <div class="wrap">
@@ -479,8 +460,7 @@ footer nav{display:flex;flex-wrap:wrap;justify-content:center;gap:18px;margin-bo
    SHOWS: the only part you need to edit for a new show.
    - Add a new show to UPCOMING (copy the block, change the details).
    - The page always shows the soonest show that hasn't finished yet.
-   - When a show is over (6 hours after doors), it drops off by itself
-     and moves to the top of "Where we've played".
+   - When a show is over (6 hours after doors), it drops off by itself.
    - With no upcoming shows, the page says "Next show coming soon".
    Times must say -05:00 (Nov–Mar) or -04:00 (Mar–Nov) for Eastern time.
    ===================================================================== */
@@ -506,18 +486,6 @@ var UPCOMING = [
   }
 ];
 
-/* Past shows (from the band's Facebook events). Newest first. */
-var PLAYED = [
-  { date: '2026-10-25', title: 'Halloween Bash', venue: 'Eclipse Nightclub Riverside', city: 'Jacksonville' },
-  { date: '2026-07-11', title: 'Sanford Punk Night 1', venue: 'West End Trading Co.', city: 'Sanford' },
-  { date: '2026-04-18', title: 'Love Earth Music & Art Festival', venue: 'Issues Inc', city: 'DeLand' },
-  { date: '2026-03-28', title: 'EP Release w/ Crooked Pilots & Cherry 2000', venue: 'Cinematique Theater', city: 'Daytona Beach' },
-  { date: '2026-02-14', title: 'Live at Sound Bites', venue: 'Sound Bites', city: 'Orlando' },
-  { date: '2025-10-28', title: 'Full Punk Brutality', venue: 'Uncle Lou’s Entertainment Hall', city: 'Orlando' },
-  { date: '2025-10-16', title: 'Live at NovelTea', venue: 'NovelTea', city: 'DeLand' },
-  { date: '2025-09-27', title: 'Ormond Beach Live', venue: 'The Casements', city: 'Ormond Beach' },
-  { date: '2025-04-12', title: 'Delandapalooza', venue: 'Delandapalooza', city: 'DeLand' }
-];
 /* ===================================================================== */
 
 /* Meta pixel (counts visits, and "Get Tickets" clicks as checkouts) */
@@ -537,22 +505,11 @@ if (PIXEL_ID) {
   function $(k){ return document.querySelectorAll('[data-s="'+k+'"]'); }
   function set(k, html){ $(k).forEach(function(e){ e.innerHTML = html; }); }
   function esc(t){ return String(t).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
-  var MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 
   // Which show is next?
   var shows = UPCOMING.slice().sort(function(a,b){ return new Date(a.doors) - new Date(b.doors); });
   var finished = shows.filter(function(x){ return new Date(x.doors).getTime() + ENDS_AFTER_HOURS*3600e3 <= now; });
   var show = shows.filter(function(x){ return finished.indexOf(x) < 0; })[0];
-
-  // Finished shows go to the top of "Where we've played"
-  var played = finished.map(function(x){
-    return { date: x.doors.slice(0,10), title: x.name, venue: x.venue, city: x.city.replace(/, ?FL$/,'') };
-  }).reverse().concat(PLAYED);
-  set('played', played.map(function(x){
-    var d = x.date.split('-');
-    return '<li><span class="when">'+MONTHS[+d[1]-1]+' '+(+d[2])+'<small>'+d[0]+'</small></span>'+
-           '<span class="what"><b>'+esc(x.title)+'</b>'+esc(x.venue)+' · '+esc(x.city)+'</span></li>';
-  }).join(''));
 
   if (!show) {
     // No upcoming show: switch to "coming soon"
